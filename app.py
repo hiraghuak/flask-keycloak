@@ -1,17 +1,31 @@
 from flask import Flask, redirect, request, jsonify, session, Response
 from keycloak import Client
+from keycloak.extensions.flask import AuthenticationMiddleware
 
 
 api = Flask(__name__)
-api.config['SECRET_KEY'] = 'EYxuFcNqGamVU78GgfupoO5N4z2xokA58XtL0ag'
+api.config["SECRET_KEY"] = "secret0123456789"
+api.wsgi_app = AuthenticationMiddleware(
+    api.wsgi_app,
+    api.config,
+    api.session_interface,
+    callback_url="http://localhost:5000/kc/callback",
+    redirect_url="/howdy",
+)
+
 kc = Client()
 
+@api.route("/howdy")
+def howdy():
+    user = session["user"]
+    return f"Howdy {user}"
 
 @api.route('/login', methods=['GET'])
 def login():
     """ Initiate authentication """
     url, state = kc.login()
     session['state'] = state
+    print(url, " test url ")
     return redirect(url)
 
 
@@ -37,6 +51,9 @@ def login_callback():
     # send userinfo to user
     return jsonify(userinfo)
 
+@api.route('/')
+def hello_world():
+    return 'Hello, World!'
 
 if __name__ == '__main__':
     api.run(host='0.0.0.0')

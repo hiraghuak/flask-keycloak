@@ -1,4 +1,4 @@
-#!d:\autointelli\test3\env\scripts\python.exe
+#!d:\autointelli\test5\flask-keycloak\env\scripts\python.exe
 from django.core import management
 
 if __name__ == "__main__":

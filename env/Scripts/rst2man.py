@@ -1,4 +1,4 @@
-#!d:\autointelli\test3\env\scripts\python.exe
+#!d:\autointelli\test5\flask-keycloak\env\scripts\python.exe
 
 # Author:
 # Contact: grubert@users.sf.net
