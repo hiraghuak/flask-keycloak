@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h2 class="text-center">Welcome!</h2>
+
+  {% for post in posts %}
+  <ul>
+    <li>{{post.name}} | {{post.age}} </li>
+  </ul>
+  {% endfor %}
+{% endblock content %}
