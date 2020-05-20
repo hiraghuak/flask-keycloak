@@ -22,10 +22,6 @@ api.wsgi_app = AuthenticationMiddleware(
 kc = Client()
 
 
-# @api.route('/')
-# def gotohome():
-#     homeurl= '/login'
-#     return redirect(homeurl)
 @api.route('/')
 @api.route('/home')
 def hello_world():
@@ -44,9 +40,9 @@ def contact():
 
 @api.route("/howdy")
 def howdy():
-    # user = session["user"]
-    # return f"Howdy {user}"
-    return "successfull"
+    user = session["user"]
+    return f"Howdy {user}"
+    # return "successfull"
 
 
 @api.route('/logout', methods=['GET'])
